@@ -1,0 +1,22 @@
+web:
+   image: php:5.6-apache
+   ports:
+     - "80:80"
+     - "443:443"
+   links:
+     - db
+   volumes:
+     - ./www:/var/www/html
+
+db:
+  image: mariadb
+  restart: always
+  volumes:
+    - ./mysql:/var/lib/mysql
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_USER: admin
+    MYSQL_PASSWORD: test
+    MYSQL_DATABASE: database
+  ports:
+    - "8889:3306"
